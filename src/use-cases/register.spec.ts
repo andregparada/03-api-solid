@@ -15,12 +15,7 @@ describe('Register Use Case', () => {
       password: '123456',
     })
 
-    const isPasswordCorrectlyHashed = await compare(
-      '123456',
-      user.password_hash,
-    )
-
-    expect(isPasswordCorrectlyHashed).toBe(true)
+    expect(user.id).toEqual(expect.any(String))
   })
 
   it('should hash user password upon registration', async () => {
@@ -33,7 +28,12 @@ describe('Register Use Case', () => {
       password: '123456',
     })
 
-    expect(user.id).toEqual(expect.any(String))
+    const isPasswordCorrectlyHashed = await compare(
+      '123456',
+      user.password_hash,
+    )
+
+    expect(isPasswordCorrectlyHashed).toBe(true)
   })
 
   it('should not be able to register with same email twice', async () => {
